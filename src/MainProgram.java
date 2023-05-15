@@ -106,6 +106,15 @@ class MainProgram {
      * übergeben bekommt und die den größten Wert in diesem Array zurückgibt.
      * Tipp: Versuchen Sie, mit einem Durchlauf durch das Array zu kommen.
      */
+    private static int findMaximum (int[] array) {
+        int max = array[array.length-1];
+        for (int i = 0; i < array.length-1; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+        }
+        return max;
+    }
 
 
 
@@ -114,13 +123,31 @@ class MainProgram {
      * übergeben bekommt und die den Index des größten Werts in diesem Array zurückgibt.
      * Tipp: Versuchen Sie, mit einem Durchlauf durch das Array zu kommen.
      */
-
+    private static int findMaximumIndex (int[] array) {
+        int max = findMaximum (array);
+        for (int i = 0; i < array.length-1; i++) {
+            if (array[i] == max) {
+                return i;
+            }
+        }
+        return array.length-1;
+    }
 
 
     /** 6. Bestimmen der Häufigkeit des Maximums in einem Feld
      * Schreiben Sie eine Methode countMaximum, die ein Array des Typs int als Parameter
      * übergeben bekommt und die Häufigkeit der größten Zahl in diesem Array zurückgibt.
      */
+    private static int countMaximum (int[] array) {
+        int count = 0;
+        int max = findMaximum (array);
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == max) {
+                count++;
+            }
+        }
+        return count;
+    }
 
 
 
@@ -129,6 +156,14 @@ class MainProgram {
      * übergeben bekommt. Die Methode isSorted soll true zurückgeben, falls die im Array enthaltenen Werte aufsteigend sortiert sind.
      * Sonst soll false zurückgegeben werden.
      */
+    private static boolean isSorted (int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > array[i+1] || array[i] == array[i+1]) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 
 
@@ -139,7 +174,14 @@ class MainProgram {
      * ob es sich bei dem Array um ein Palindrom handelt.
      * Die Methode soll einen Wert des Typs boolean zurückgeben.
      */
-
+    public static boolean checkArray (int[] array) {
+        for (int i = 0; i < array.length/2; i++) {
+            if (array[i] != array[array.length-i]) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 
     /** 9. Erhöhen der Inhalte eines Feldes
@@ -148,6 +190,13 @@ class MainProgram {
      * Beispiel: Werden ein Array mit den Elementen 80,7,1,56,11,72,43,37 als erstes und der Wert 17 als zweites Argument übergeben,
      * so soll ein neues(!) Array mit den Werten 97,24,18,73,28,89,60,54 zurückgegeben werden.
      */
+    public static void increaseArray (int[] array, int inc) {
+        if (array != null) {
+            for (int i = 0; i < array.length; i++) {
+                array[i] += inc;
+            }
+        }
+    }
 
 
 }
