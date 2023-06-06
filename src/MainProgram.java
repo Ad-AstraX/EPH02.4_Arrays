@@ -1,3 +1,5 @@
+import com.sun.istack.internal.NotNull;
+
 class MainProgram {
 
     //Attribute
@@ -6,11 +8,13 @@ class MainProgram {
 
     //Deklaration
     private static int[] numbers;
+    private static int[] otherNumbers;
 
     public static void main(String[] args){
-        withNegatives = false;
+        withNegatives = true;
         maxAbsolute = 100;
         numbers = new int[10];
+        otherNumbers = new int[]{1, 2, 3, 4, 3, 2, 1};
         fillArray(numbers, withNegatives, maxAbsolute);
 
         showArray(numbers);
@@ -20,7 +24,21 @@ class MainProgram {
         System.out.println("Summe aller Zahlen im Array: " + sumUp(numbers));
         System.out.println("In diesem Array gibt es " + countNegatives(numbers) + " negative Zahlen.");
         System.out.println("Summe der negativen Zahlen: " + sumUpNegatives(numbers));
+        System.out.println("ISt es ein Palindrom: " + checkArray(otherNumbers));
+
+        zahlenMuster();
     }
+
+
+    public static void zahlenMuster() {
+        long zahlen = 123456789;
+        System.out.println(0 + String.valueOf(zahlen));
+        for (int i = 0; i < 9; i++) {
+            zahlen = Long.parseLong (zahlen % 1000000000 + String.valueOf (i));
+            System.out.println(zahlen);
+        }
+    }
+
 
     private static void fillArray(int[] array, boolean wN, int maxA){
         if(wN){
@@ -175,8 +193,11 @@ class MainProgram {
      * Die Methode soll einen Wert des Typs boolean zurückgeben.
      */
     public static boolean checkArray (int[] array) {
+        if (array.length < 2) return true;
         for (int i = 0; i < array.length/2; i++) {
-            if (array[i] != array[array.length-i]) {
+            if (array[i] != array[array.length-1-i]) {
+                System.out.println(array[i]);
+                System.out.println(array[array.length-1-i]);
                 return false;
             }
         }
@@ -190,12 +211,12 @@ class MainProgram {
      * Beispiel: Werden ein Array mit den Elementen 80,7,1,56,11,72,43,37 als erstes und der Wert 17 als zweites Argument übergeben,
      * so soll ein neues(!) Array mit den Werten 97,24,18,73,28,89,60,54 zurückgegeben werden.
      */
-    public static void increaseArray (int[] array, int inc) {
-        if (array != null) {
-            for (int i = 0; i < array.length; i++) {
-                array[i] += inc;
-            }
+    public static int[] increaseArray (@NotNull int[] array, int inc) {
+        int[] newArray = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            newArray[i] = array[i] + inc;
         }
+        return newArray;
     }
 
 
